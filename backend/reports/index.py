@@ -26,7 +26,11 @@ def handler(event: dict, context) -> dict:
     if not token:
         return {'statusCode': 401, 'headers': CORS, 'body': json.dumps({'error': 'Не авторизован'})}
 
-    conn = get_conn()
+    try:
+        conn = get_conn()
+    except Exception as e:
+        return {'statusCode': 500, 'headers': CORS, 'body': json.dumps({'error': f'DB error: {e}'})}
+
     cur = conn.cursor()
 
     try:

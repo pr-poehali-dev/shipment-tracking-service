@@ -2,8 +2,9 @@
   "tests": [
     {
       "name": "Get notifications without token",
-      "method": "GET",
+      "method": "POST",
       "path": "/",
+      "body": {"action": "list"},
       "expectedStatus": 401,
       "bodyMatcher": "partial"
     }
